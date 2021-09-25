@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(DataDbContext))]
     [Migration("20210920202630_mig1")]
     partial class mig1
     {

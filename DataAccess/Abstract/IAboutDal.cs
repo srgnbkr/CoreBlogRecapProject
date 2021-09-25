@@ -1,4 +1,5 @@
-﻿using Entity.Concrete;
+﻿using Core.DataAccess;
+using Entity.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IAboutDal : IGenericDal<About>
+    public interface IAboutDal : IGenericRepository<About>
     {
     }
 }

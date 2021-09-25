@@ -1,4 +1,5 @@
-﻿using Business.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
 using DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,10 +11,22 @@ namespace CoreBlogWebUI.Controllers
 {
     public class BlogController : Controller
     {
-        BlogManager blogManager = new BlogManager(new EfBlogRepository());
+        IBlogService _blogService;
+
+        public BlogController(IBlogService blogService)
+        {
+            _blogService = blogService;
+        }
+
         public IActionResult Index()
         {
-            var result = blogManager.GetAll();
+            var result = _blogService.GetBlogListDto();
+            return View(result);
+        }
+
+        public IActionResult BlogDetails(int id)
+        {
+            var result = _blogService.GetBlog(id);
             return View(result);
         }
     }

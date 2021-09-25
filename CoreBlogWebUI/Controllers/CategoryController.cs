@@ -11,7 +11,12 @@ namespace CoreBlogWebUI.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+        ICategoryService _categoryService;
+
+        public CategoryController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
 
         public IActionResult Index()
         {
@@ -20,7 +25,7 @@ namespace CoreBlogWebUI.Controllers
 
         public IActionResult CategoryList()
         {
-            var result = categoryManager.GetAll();
+            var result = _categoryService.GetAll();
             return View(result);
         }
     }

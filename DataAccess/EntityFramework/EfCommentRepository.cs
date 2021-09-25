@@ -1,5 +1,6 @@
-﻿using DataAccess.Abstract;
-using DataAccess.Repositories;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityFramework
 {
-    public class EfCommentRepository : GenericRepository<Comment>,ICommentDal
+    public class EfCommentRepository : EfGenericRepositoryBase<Comment, DataDbContext>, ICommentDal
     {
+
     }
+    
 }
