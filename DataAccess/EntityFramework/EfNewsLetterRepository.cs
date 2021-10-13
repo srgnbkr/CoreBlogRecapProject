@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.EntityFramework
 {
-    public class EfWriterRepository : EfGenericRepositoryBase<Writer, DataDbContext>, IWriterDal
+    public class EfNewsLetterRepository : EfGenericRepositoryBase<NewsLetter, DataDbContext>, INewsLetterDal
     {
     }
 }

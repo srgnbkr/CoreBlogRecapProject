@@ -4,14 +4,16 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211013065651_mig_writer_blog_relation")]
+    partial class mig_writer_blog_relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,24 +172,6 @@ namespace DataAccess.Migrations
                     b.HasKey("ContactId");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("Entity.Concrete.NewsLetter", b =>
-                {
-                    b.Property<int>("MailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Mail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("MailStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("MailId");
-
-                    b.ToTable("NewsLetters");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Writer", b =>

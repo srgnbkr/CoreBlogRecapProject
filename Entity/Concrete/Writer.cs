@@ -17,6 +17,11 @@ namespace Entity.Concrete
         public string WriterImage { get; set; }
         public string WriterMail { get; set; }
         public string WriterPassword { get; set; }
+        public string WriterConfirmPassword { get; set; }
+
+
         public bool WriterStatus { get; set; }
+
+        public List<Blog> Blogs { get; set; }
     }
 }

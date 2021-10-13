@@ -32,6 +32,13 @@ namespace CoreBlogWebUI
             services.AddSingleton<ICategoryDal, EfCategoryRepository>();
             services.AddSingleton<IBlogService, BlogManager>();
             services.AddSingleton<IBlogDal, EfBlogRepository>();
+            services.AddSingleton<ICommentService, CommentManager>();
+            services.AddSingleton<ICommentDal, EfCommentRepository>();
+            services.AddSingleton<IWriterService, WriterManager>();
+            services.AddSingleton<IWriterDal, EfWriterRepository>();
+            services.AddSingleton<INewsLetterService, NewsLetterManager>();
+            services.AddSingleton<INewsLetterDal, EfNewsLetterRepository>();
+           
 
         }
 

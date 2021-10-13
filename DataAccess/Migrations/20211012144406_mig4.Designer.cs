@@ -4,14 +4,16 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211012144406_mig4")]
+    partial class mig4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,14 +79,9 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WriterId")
-                        .HasColumnType("int");
-
                     b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("WriterId");
 
                     b.ToTable("Blogs");
                 });
@@ -172,24 +169,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Entity.Concrete.NewsLetter", b =>
-                {
-                    b.Property<int>("MailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Mail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("MailStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("MailId");
-
-                    b.ToTable("NewsLetters");
-                });
-
             modelBuilder.Entity("Entity.Concrete.Writer", b =>
                 {
                     b.Property<int>("WriterId")
@@ -231,15 +210,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Concrete.Writer", "Writer")
-                        .WithMany("Blogs")
-                        .HasForeignKey("WriterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Comment", b =>
@@ -259,11 +230,6 @@ namespace DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Entity.Concrete.Category", b =>
-                {
-                    b.Navigation("Blogs");
-                });
-
-            modelBuilder.Entity("Entity.Concrete.Writer", b =>
                 {
                     b.Navigation("Blogs");
                 });

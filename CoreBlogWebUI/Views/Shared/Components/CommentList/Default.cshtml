@@ -1,0 +1,7 @@
+﻿@model IEnumerable<CoreBlogWebUI.Models.UserComment>
+
+@foreach (var item in Model)
+{
+    <p>@item.Id</p>
+    <p>@item.Username</p>
+}

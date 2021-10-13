@@ -26,6 +26,8 @@ namespace CoreBlogWebUI.Controllers
 
         public IActionResult BlogDetails(int id)
         {
+            
+            ViewBag.comment = id;
             var result = _blogService.GetBlog(id);
             return View(result);
         }
