@@ -1,10 +1,14 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
+
 <div class="tech-btm">
+    <h4 id="mail">Mail Bültenine Abone Ol</h4>
+
     <p>Teknoloji, yazılım ve diğer bloglar...</p>
     <form id="subscribeForm" action="/NewsLetter/SubscribeMail/" method="post">
-        <input id="email" type="email" placeholder="Email" required="" name="Mail" />
+        <input id="email" type="email" placeholder="e-posta adresi" required="" name="Mail" />
         <input type="submit" value="Abone Ol">
     </form>
 </div>
@@ -23,9 +27,15 @@
             url: url,
             data: form.serialize(), 
             success: function () {
-                swal("Tebrikler!", document.getElementById("email").value + " adresiyle bültene abone oldunuz!", "success");
+                swal("Bilgi!", document.getElementById("email").value + " adresiyle bültene abone oldunuz!", "success");
                 document.getElementById("email").value = "";
             }
         });
     });
 </script>
+
+<style>
+    #mail {
+        color: white
+    }
+</style>

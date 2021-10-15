@@ -20,7 +20,7 @@ namespace Business.Concrete
 
         public void CommentAdd(Comment comment)
         {
-            comment.BlogId = 4; 
+            comment.BlogId = 4;
             comment.CommentDate = DateTime.Now;
             comment.CommentStatus = true;
             _commentDal.Add(comment);

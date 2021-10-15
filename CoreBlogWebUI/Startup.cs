@@ -2,9 +2,12 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.EntityFramework;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,17 +31,60 @@ namespace CoreBlogWebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSession();
+
+            services.AddMvc(confing =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                confing.Filters.Add(new AuthorizeFilter(policy));
+                
+            });
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x =>
+                    {
+                        x.LoginPath = "/Login/Index";
+                    }
+                );
+                
+               
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Login/Index";
+                options.SlidingExpiration = true;
+            });
+            
+            
             services.AddSingleton<ICategoryService, CategoryManager>();
             services.AddSingleton<ICategoryDal, EfCategoryRepository>();
+            
             services.AddSingleton<IBlogService, BlogManager>();
             services.AddSingleton<IBlogDal, EfBlogRepository>();
+            
             services.AddSingleton<ICommentService, CommentManager>();
             services.AddSingleton<ICommentDal, EfCommentRepository>();
+            
             services.AddSingleton<IWriterService, WriterManager>();
             services.AddSingleton<IWriterDal, EfWriterRepository>();
+            
             services.AddSingleton<INewsLetterService, NewsLetterManager>();
             services.AddSingleton<INewsLetterDal, EfNewsLetterRepository>();
-           
+            
+            services.AddSingleton<IAboutService, AboutManager>();
+            services.AddSingleton<IAboutDal, EfAboutRepository>();
+
+            services.AddSingleton<IContactService, ContactManager>();
+            services.AddSingleton<IContactDal, EfContactRepository>();
+
+
+
 
         }
 
@@ -55,8 +101,16 @@ namespace CoreBlogWebUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+
+            app.UseSession();
+
+            app.UseAuthentication();
             
 
             app.UseRouting();
