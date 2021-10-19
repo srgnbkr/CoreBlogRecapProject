@@ -1,5 +1,8 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
+using Core.Utilities.IoC;
 using DataAccess.Abstract;
 using DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -34,6 +37,8 @@ namespace CoreBlogWebUI
 
             services.AddSession();
 
+            services.AddCors();
+
             services.AddMvc(confing =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -48,8 +53,15 @@ namespace CoreBlogWebUI
                         x.LoginPath = "/Login/Index";
                     }
                 );
-                
-               
+
+
+
+            
+
+
+
+
+
 
 
             services.ConfigureApplicationCookie(options =>
@@ -60,28 +72,13 @@ namespace CoreBlogWebUI
                 options.LoginPath = "/Login/Index";
                 options.SlidingExpiration = true;
             });
-            
-            
-            services.AddSingleton<ICategoryService, CategoryManager>();
-            services.AddSingleton<ICategoryDal, EfCategoryRepository>();
-            
-            services.AddSingleton<IBlogService, BlogManager>();
-            services.AddSingleton<IBlogDal, EfBlogRepository>();
-            
-            services.AddSingleton<ICommentService, CommentManager>();
-            services.AddSingleton<ICommentDal, EfCommentRepository>();
-            
-            services.AddSingleton<IWriterService, WriterManager>();
-            services.AddSingleton<IWriterDal, EfWriterRepository>();
-            
-            services.AddSingleton<INewsLetterService, NewsLetterManager>();
-            services.AddSingleton<INewsLetterDal, EfNewsLetterRepository>();
-            
-            services.AddSingleton<IAboutService, AboutManager>();
-            services.AddSingleton<IAboutDal, EfAboutRepository>();
 
-            services.AddSingleton<IContactService, ContactManager>();
-            services.AddSingleton<IContactDal, EfContactRepository>();
+            services.AddDependencyResolvers(new ICoreModule[] {
+               new CoreModule()
+            });
+
+
+
 
 
 
