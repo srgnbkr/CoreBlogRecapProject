@@ -18,7 +18,7 @@ namespace CoreBlogWebUI.ViewComponents.Blog
 
         public IViewComponentResult Invoke()
         {
-            var result = _blogService.GetByWriterId(3);
+            var result = _blogService.GetByWriterId(2);
             return View(result);
         }
     }

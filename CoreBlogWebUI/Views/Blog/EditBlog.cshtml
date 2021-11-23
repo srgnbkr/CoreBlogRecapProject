@@ -1,0 +1,48 @@
+﻿@model Entity.Concrete.Blog
+
+@{
+    ViewData["Title"] = "EditBlog";
+    Layout = "~/Views/Shared/_WriterProfilePage.cshtml";
+}
+
+<div class="container">
+    
+    <form  method="post" action="/Blog/EditBlog">
+        <div class="row mb-3">
+            <label for="blogTitle" class="col-sm-2 col-form-label">Blog Başlığı</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x =>x.BlogTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @class = "text-danger" })
+            </div>
+            
+        </div>
+
+        <div class="row mb-3">
+            <label for="blogContent" class="col-sm-2 col-form-label">Blog İçeriği</label>
+            <div class="col-sm-10">
+                @Html.TextAreaFor(x =>x.BlogContent,10,3, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })
+            </div>
+            
+        </div>
+
+
+        <div class="row mb-3">
+            <label for="blogPhoto" class="col-sm-2 col-form-label">Fotoğraf</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x =>x.BlogImage, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BlogImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @await Component.InvokeAsync("CategoryListForBlogAddForm")
+
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Düzenle</label>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-success">Kaydet</button>
+                <a type="submit" class="btn btn-secondary" href="/Blog/GetBlogWriterId">Vazgeç</a>
+            </div>
+        </div>
+    </form>
+</div>

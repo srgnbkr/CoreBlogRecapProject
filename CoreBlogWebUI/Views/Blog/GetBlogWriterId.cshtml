@@ -1,0 +1,104 @@
+﻿@using Entity.Dto
+@model List<WriterBlogDto>
+
+
+@{
+    ViewData["Title"] = "GetBlogWriterId";
+    Layout = "~/Views/Shared/_WriterProfilePage.cshtml";
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Bloglarım</h5>
+
+
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Blog Başlığı</th>
+                                <th scope="col">Oluşturulma Tarihi</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Durum</th>
+                                <th>Düzenle</th>
+                                <th>Sil</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+
+                                    <td>@item.BlogTitle</td>
+                                    <td>@item.BlogCreateDate.ToShortDateString()</td>
+
+
+                                    <td>@item.CategoryName</td>
+                                    @if (item.BlogStatus ==     true)
+                                    {
+                                        <td><a class="btn btn-success"><i class="bi bi-check-circle"></i></a></td>
+
+                                    }
+                                    else
+                                    {
+                                        <td><a class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></a></td>
+
+
+                                    }
+                                    <td><a class="btn btn-primary" href="/Blog/EditBlog/@item.BlogId">Düzenle</a></td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            Sil
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Blog Sil</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Silme işlemini gerçekleştirmek istiyor musunuz?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                                                        <button type="button" class="btn btn-danger">Sil </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
+
+
+
+
+                        </tbody>
+
+                    </table>
+
+
+
+                    <!-- End Table with stripped rows -->
+
+                </div>
+
+            </div>
+            <a type="button" href="/Blog/AddBlog" class="btn btn-success rounded-pill">Blog Ekle</a>
+        </div>
+        
+    </div>
+</section>
+

@@ -1,0 +1,24 @@
+﻿@using Entity.Concrete
+@model IEnumerable<Category>
+
+
+
+<div class="row mb-3">
+    <label for="blogCategory" class="col-sm-2 col-form-label">Kategori</label>
+    <div class="col-sm-10">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="CategoryId">
+            @foreach (var item in Model)
+            {
+                
+                <option value="@item.CategoryId">@item.CategoryName</option>
+                
+
+            }
+
+        </select>
+    </div>
+
+
+
+</div>
+

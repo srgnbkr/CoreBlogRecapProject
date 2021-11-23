@@ -10,5 +10,6 @@ namespace Business.Abstract
     public interface IAboutService
     {
         List<About> GetAll();
+        
     }
 }

@@ -20,6 +20,7 @@ namespace Business.Concrete
 
         public void Register(Writer writer)
         {
+            
             writer.WriterStatus = true;
             _writerDal.Add(writer);
         }

@@ -39,6 +39,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ContactManager>().As<IContactService>().SingleInstance();
             builder.RegisterType<EfContactRepository>().As<IContactDal>().SingleInstance();
 
+            
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

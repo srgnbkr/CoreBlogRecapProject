@@ -1,4 +1,5 @@
 ﻿using Entity.Concrete;
+using Entity.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,11 @@ namespace Business.Abstract
         void Delete(Blog blog);
         void Update(Blog blog);
         Blog GetCategory(int id);
+        
         Blog GetBlog(int id);
         List<Blog> GetAll();
         List<Blog> GetBlogListDto();
-        List<Blog> GetByWriterId(int id);
+        List<WriterBlogDto> GetByWriterId(int id);
         
     }
 }

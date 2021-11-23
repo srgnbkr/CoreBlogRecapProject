@@ -1,9 +1,11 @@
-﻿@using Entity.Concrete
-@model List<Blog>
+﻿@using Entity.Dto
+@model List<WriterBlogDto>
 
 
 <div class="tech-btm">
     <h4>Yazarın Diğer Yazıları</h4>
+
+    
 
     @foreach (var item in Model)
     {
