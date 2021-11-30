@@ -34,7 +34,7 @@ namespace Business.Concrete
 
         public void Delete(Blog blog)
         {
-            blog.BlogStatus = true;
+            
             
             _blogDal.Delete(blog);
            
@@ -48,18 +48,19 @@ namespace Business.Concrete
         public Blog GetBlog(int id)
         {
             return _blogDal.Get(x => x.BlogId == id);
+            
         }
 
       
 
         public List<Blog> GetBlogListDto()
         {
-            return _blogDal.GetListWithCategory();
+            return _blogDal.GetListWithCategory().Where(x => x.BlogStatus == true).ToList();
         }
 
         public List<WriterBlogDto> GetByWriterId(int id)
         {
-            return _blogDal.GetBlogDetails(x => x.WriterId == id);
+            return _blogDal.GetBlogDetails(x => x.WriterId == id).Where(x => x.BlogStatus == true).ToList();
         }
 
         public Blog GetCategory(int id)
@@ -70,6 +71,9 @@ namespace Business.Concrete
 
         public void Update(Blog blog)
         {
+            blog.WriterId = 2;
+            blog.BlogStatus = true;
+            
             _blogDal.Update(blog);
         }
     }
